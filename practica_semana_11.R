@@ -249,6 +249,15 @@ library(ggplot2)
 
 # >>> ESCRIBA SU CODIGO AQUI:
 
+ggplot(airquality,
+       aes(x = Temp, y = Ozone)) +
+  geom_point(color = "blue", 
+             pch = 19) +
+  labs(title = "Relacion entre temperatura y Ozono (NY,1973)",
+       x = "Temperatura",
+       y = "Ozono")
+
+
 
 
 # ------------------------------------------------------------------------------
