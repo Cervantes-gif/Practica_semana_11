@@ -305,6 +305,14 @@ ggplot(airquality, aes(x= Temp,
 
 # >>> ESCRIBA SU CODIGO AQUI:
 
+ggplot(iris, aes(x= Species,
+                 y= Sepal.Length,
+                 fill = Species)) +
+  geom_bar(stat = "summary", fun = "mean") + # le dice a ggplot no cuente filas sino que calcule el promedio de sepal.length para cada especie
+  labs(title = "Promedio de longitud del Sepalo por especies",
+       x= "Especie",
+       y= "Promedio de Sepal. Length",
+       fill = "Especie") # colorea cada baraa de un color diferente segun la especie 
 
 
 # ------------------------------------------------------------------------------
