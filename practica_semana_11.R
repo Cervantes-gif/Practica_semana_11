@@ -217,7 +217,7 @@ pie(
   main = "Distribución de cilindros en mtcars"
 )
 # ------------------------------------------------------------------------------
-# Ejercicio 1.6  MULTIPLES GRAFICOS Y EXPORTACION  (5 pts)  [Resp.: Integrante C]
+# Ejercicio 1.6  MULTIPLES GRAFICOS Y EXPORTACION  (5 pts)  [Resp.: Integrante B]
 # ------------------------------------------------------------------------------
 # a) Use par(mfrow = c(1, 2)) para colocar DOS graficos base de su eleccion
 #    lado a lado. Restablezca el panel con par(mfrow = c(1, 1)) al terminar.
@@ -226,6 +226,35 @@ pie(
 #    versionar imagenes generadas automaticamente.
 
 # >>> ESCRIBA SU CODIGO AQUI:
+
+par(mfrow = c(1, 2))
+
+hist(airquality$Ozone,
+     breaks =16,
+     main = "histograma Ozone",
+     xlab = "levels ozone",
+     ylab = "Eje y")
+
+pie(
+  conteo_cyl,
+  labels = etiquetas,
+  main = "Distribución de cilindros en mtcars"
+)
+
+par(mfrow = c(1, 1))
+
+
+# guardar a png
+
+png("grafico_mpg.png", width = 800, height = 600)
+
+pie(
+  conteo_cyl,
+  labels = etiquetas,
+  main = "Distribución de cilindros en mtcars"
+)
+
+dev.off()
 
 
 
