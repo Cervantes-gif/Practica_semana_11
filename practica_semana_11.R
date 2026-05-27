@@ -96,6 +96,10 @@ data("ToothGrowth")
 
 # >>> ESCRIBA SU CODIGO AQUI: use str() y summary() sobre airquality y mtcars.
 
+str(airquality)
+summary(airquality)
+str(mtcars)
+summary(mtcars)
 
 
 # 0.2  En un comentario, indiquen cuantas observaciones y cuantas variables
@@ -103,7 +107,7 @@ data("ToothGrowth")
 #
 # Respuesta 0.2: _______________________________________________________________
 
-
+# airquality tiene 153 observaciones y si contiene valores NA
 
 # ==============================================================================
 # PARTE 1 - GRAFICOS BASE DE R  (25 puntos)
@@ -133,9 +137,22 @@ data("ToothGrowth")
 
 # >>> ESCRIBA SU CODIGO AQUI:
 
+hist(airquality$Ozone,
+     breaks = 6,
+     main = "histograma Ozone",
+     xlab = "levels ozone",
+     ylab = "Eje y")
+
+hist(airquality$Ozone,
+     breaks =16,
+     main = "histograma Ozone",
+     xlab = "levels ozone",
+     ylab = "Eje y")
 
 
 # Comentario 1.2: ______________________________________________________________
+
+# Al agregar diferentes valores de break lo uqe cambia son la cantidad de barras creadas en el histograma
 
 
 
