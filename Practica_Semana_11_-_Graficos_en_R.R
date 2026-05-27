@@ -141,7 +141,8 @@ barplot(airquality$Wind,
         border = "steelblue")
 
 
-
+#Interpretacion Cervantes:  El grafico muestra la velocidad del viento registrada en los 153 dias. La ,ayoria de las observaciones se encuentran entre 7 y 15 mph. 
+#Se observan algunos picos maximos que superan los 20 mph y muy pocos dias con viento cerca de 0 mph.
 
 
 
@@ -183,10 +184,20 @@ barplot(airquality$Wind,
 
 # >>> ESCRIBA SU CODIGO AQUI:
 
+#Ejercicio 1.4
+
+plot(airquality$Temp,
+     airquality$Ozone,
+     main = "Relacion entre temperatura y Ozono (NY)",
+     xlab = "Temperatura",
+     ylab = "Ozono",
+     pch = 19,
+     col = "blue")
 
 
-# Comentario 1.4: ______________________________________________________________
-
+# Comentario 1.4: Se observa una relacion positiva entre la temperatura y el nivel de ozono, a mayor
+# temperatura, tiende a mayor concentracion de ozono. La relacion no es perfectamente lineal pero si hay una
+# tendencia clara de aumento 
 
 
 # ------------------------------------------------------------------------------
@@ -238,6 +249,15 @@ library(ggplot2)
 
 # >>> ESCRIBA SU CODIGO AQUI:
 
+ggplot(airquality,
+       aes(x = Temp, y = Ozone)) +
+  geom_point(color = "blue", 
+             pch = 19) +
+  labs(title = "Relacion entre temperatura y Ozono (NY,1973)",
+       x = "Temperatura",
+       y = "Ozono")
+
+
 
 
 # ------------------------------------------------------------------------------
@@ -256,13 +276,24 @@ library(ggplot2)
 
 
 # ------------------------------------------------------------------------------
-# Ejercicio 2.3  GEOMETRIAS ADICIONALES Y FACETAS  (4 pts)  [Resp.: Integrante C]
+# Ejercicio 2.3  GEOMETRIAS ADICIONALES Y FACETAS  (4 pts)  [Resp.: Integrante A]
 # ------------------------------------------------------------------------------
 # Sobre el grafico del 2.2, agregue:
 #   - una capa geom_smooth(method = "lm") para mostrar la tendencia lineal;
 #   - un facet_wrap(~ Month) para separar un panel por mes.
 
 # >>> ESCRIBA SU CODIGO AQUI:
+
+ggplot(airquality, aes(x= Temp,
+                       y= Ozone,
+                       color = factor(Month))) +
+  geom_point(pch = 19) +
+  geom_smooth(method = "lm", se= FALSE) + # el method Im dibuja una linea de tendencia lineal sobre los puntos 
+  facet_wrap(~ Month) + # lo que haces es que separa los meses en 5 partes de mayo a septiembre
+  labs(title = "Relacion entre Temperatura y Ozono por Mes",
+       x = "Temperatura",
+       y = "Ozono",
+       color = "Mes")
 
 
 
@@ -274,6 +305,14 @@ library(ggplot2)
 
 # >>> ESCRIBA SU CODIGO AQUI:
 
+ggplot(iris, aes(x= Species,
+                 y= Sepal.Length,
+                 fill = Species)) +
+  geom_bar(stat = "summary", fun = "mean") + # le dice a ggplot no cuente filas sino que calcule el promedio de sepal.length para cada especie
+  labs(title = "Promedio de longitud del Sepalo por especies",
+       x= "Especie",
+       y= "Promedio de Sepal. Length",
+       fill = "Especie") # colorea cada baraa de un color diferente segun la especie 
 
 
 # ------------------------------------------------------------------------------
@@ -295,7 +334,7 @@ library(ggplot2)
 library(maps)
 
 # ------------------------------------------------------------------------------
-# Ejercicio 3.1  MAPA BASE  (5 pts)                [Responsable: Integrante C]
+# Ejercicio 3.1  MAPA BASE  (5 pts)                [Responsable: Integrante A]
 # ------------------------------------------------------------------------------
 # Dibuje el mapa del mundo con map(database = "world").
 # Luego dibuje UNICAMENTE el mapa de un pais a su eleccion.
@@ -303,7 +342,18 @@ library(maps)
 
 # >>> ESCRIBA SU CODIGO AQUI:
 
+# Mapa del mundo 
 
+map(database = "world")
+title(main = "Mapa del Mundo")
+
+# Mapa unicamente de Japon
+
+map("world", regions = "Japan",
+    fill = TRUE,
+    col = "darkgreen",
+    bg = "lightblue") # pone el fonde de color, simulando el mar 
+title(main = "Mapa de Japon")
 
 # ------------------------------------------------------------------------------
 # Ejercicio 3.2  MAPA POLIGONAL CON ggplot2  (5 pts)  [Resp.: Integrante A]
@@ -317,6 +367,19 @@ library(maps)
 
 # >>> ESCRIBA SU CODIGO AQUI:
 
+dev.off() # hace que lo recetee y ggplot corra bien 
+
+japon<- map_data("world", region = "Japan")
+
+ggplot(japon, aes(x= long,
+                  y= lat, 
+                  group = group)) +
+  geom_polygon(fill = "darkgreen",
+               color = "black") +
+  coord_quickmap() +
+  labs(title = "Mapa Japon",
+       x = "Longitud",
+       y= "Latitud")
 
 
 # ------------------------------------------------------------------------------
@@ -368,9 +431,10 @@ library(maps)
 #     - wordcloud     : nubes de palabras.
 #     - lattice       : sistema de graficos alternativo (graficos en celosia).
 #
-# Libreria elegida: ____________________________________________________________
-# Justifiquen en una o dos lineas por que la eligieron:
-#   ___________________________________________________________________________
+# Libreria elegida: La libreria elegida en grupo fue ggridges
+# Justifiquen en una o dos lineas por que la eligieron: Elejimos ggrides porque se relaciona directamente con ggplot2,
+# lo que no sfacilia su aprendizaje al reutilizar estructuras similares, ya conocidad. Ademas nos permite comparar distibuciones entre grupos de forma visual y compacta.
+#   
 #
 # ------------------------------------------------------------------------------
 # 4.2  FICHA DE DOCUMENTACION  (6 pts)             [Responsable: Integrante B]
@@ -403,10 +467,17 @@ library(maps)
 # en una rama compartida (por ejemplo 'feature/parte4') y resuelvan en conjunto
 # cualquier conflicto de fusion que aparezca.
 
-# install.packages("__________")   # escriba aqui el nombre de su libreria
-# library(__________)
+#install.packages("ggridges")   # escriba aqui el nombre de su libreria
+library(ggridges)
 
 # >>> ESCRIBA SU CODIGO AQUI:
+
+iris_Species<- factor(iris$factor) # convertimos Species a factor para usarlo 
+                                   # como varible de grupo.   
+
+
+
+
 
 
 
