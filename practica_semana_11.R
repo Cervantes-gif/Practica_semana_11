@@ -393,7 +393,9 @@ ggplot(
 # ==============================================================================
 # 3.0  Instalen (si es necesario) y carguen el paquete 'maps'.
 # install.packages("maps", dep = TRUE)   # descomente si aun no lo tiene
+install.packages("maps")
 library(maps)
+library(ggplot2)
 
 # ------------------------------------------------------------------------------
 # Ejercicio 3.1  MAPA BASE  (5 pts)                [Responsable: Integrante C]
@@ -431,7 +433,51 @@ library(maps)
 # >>> ESCRIBA SU CODIGO AQUI:
 
 
+dev.off() # reinicia el dispositivo gráfico
 
+japon <- map_data("world", region = "Japan")
+
+# Coordenadas de ciudades
+ciudades <- data.frame(
+  ciudad = c("Tokyo", "Osaka", "Kyoto"),
+  lon = c(139.6917, 135.5023, 135.7681),
+  lat = c(35.6895, 34.6937, 35.0116)
+)
+
+ggplot(japon,
+       aes(x = long,
+           y = lat,
+           group = group)) +
+  
+  geom_polygon(fill = "darkgreen",
+               color = "black") +
+  
+  geom_point(
+    data = ciudades,
+    aes(x = lon, y = lat),
+    color = "red",
+    size = 3,
+    inherit.aes = FALSE
+  ) +
+  
+  geom_text(
+    data = ciudades,
+    aes(x = lon,
+        y = lat,
+        label = ciudad),
+    inherit.aes = FALSE,
+    vjust = -1
+  ) +
+  
+  coord_quickmap() +
+  
+  labs(
+    title = "Mapa de Japón con ciudades importantes",
+    x = "Longitud",
+    y = "Latitud"
+  ) +
+  
+  theme_minimal()
 # ==============================================================================
 # PARTE 4 - INVESTIGACION: OTRAS LIBRERIAS DE GRAFICOS EN R  (20 puntos)
 # ==============================================================================
