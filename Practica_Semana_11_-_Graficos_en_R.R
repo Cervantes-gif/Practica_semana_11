@@ -18,8 +18,8 @@
 # ------------------------------------------------------------------------------
 # DATOS DEL GRUPO
 # ------------------------------------------------------------------------------
-# Integrante A: Keylin Francinni Cervantes Mata   Carne: C4E080  GitHub: Cervantes-gif
-# Integrante B: Esteban Vargas Rodriguez  Carne: C5K725  GitHub: stebanvr
+# Integrante A: ______________________  Carne: __________  GitHub: ____________
+# Integrante B: ______________________  Carne: __________  GitHub: ____________
 # Integrante C: ______________________  Carne: __________  GitHub: ____________
 #               (deje en blanco si el grupo es de dos personas)
 #
@@ -62,8 +62,8 @@
 #
 #   * SI EL GRUPO ES DE DOS PERSONAS: no existe Integrante C. Repartan sus
 #     ejercicios de forma equitativa entre A y B y ANOTEN aqui como quedaron:
-#     Ej 1.3 -> B  Ej 1.6 -> B  Ej 2.3 -> A   Ej 3.1 -> A
-#     Ej 4.4 -> A
+#     Ej 1.3 -> ____   Ej 1.6 -> ____   Ej 2.3 -> ____   Ej 3.1 -> ____
+#     Ej 4.4 -> ____
 #
 #   El reparto busca que cada persona practique graficos base, ggplot2 y mapas.
 #   Esta permitido AYUDARSE entre integrantes, pero cada quien debe SUBIR con
@@ -98,22 +98,16 @@ data("ToothGrowth")
 
 str(airquality)
 summary(airquality)
-
 str(mtcars)
 summary(mtcars)
 
+
 # 0.2  En un comentario, indiquen cuantas observaciones y cuantas variables
 #      tiene 'airquality' y mencionen si contiene valores faltantes (NA).
-
-nrow(airquality)
-ncol(airquality)
-
-sum(is.na(airquality))
-
 #
-# Respuesta 0.2: Airquality tiene 153 observaciones y 6 variales. Si contiene valores
-# faltantes en total 44 variables NA
+# Respuesta 0.2: _______________________________________________________________
 
+# airquality tiene 153 observaciones y si contiene valores NA
 
 # ==============================================================================
 # PARTE 1 - GRAFICOS BASE DE R  (25 puntos)
@@ -132,18 +126,6 @@ sum(is.na(airquality))
 
 # >>> ESCRIBA SU CODIGO AQUI:
 
-#Ejercicio 1.1- Grafico de barras vertical de airquality$Wind
-
-barplot(airquality$Wind,
-        main = "Velocidad del viento en New York (1973)",
-        xlab = "Observacion",
-        ylab = "Velocidad del viento",
-        border = "steelblue")
-
-
-#Interpretacion Cervantes:  El grafico muestra la velocidad del viento registrada en los 153 dias. La ,ayoria de las observaciones se encuentran entre 7 y 15 mph. 
-#Se observan algunos picos maximos que superan los 20 mph y muy pocos dias con viento cerca de 0 mph.
-
 
 
 # ------------------------------------------------------------------------------
@@ -155,9 +137,22 @@ barplot(airquality$Wind,
 
 # >>> ESCRIBA SU CODIGO AQUI:
 
+hist(airquality$Ozone,
+     breaks = 6,
+     main = "histograma Ozone",
+     xlab = "levels ozone",
+     ylab = "Eje y")
+
+hist(airquality$Ozone,
+     breaks =16,
+     main = "histograma Ozone",
+     xlab = "levels ozone",
+     ylab = "Eje y")
 
 
 # Comentario 1.2: ______________________________________________________________
+
+# Al agregar diferentes valores de break lo uqe cambia son la cantidad de barras creadas en el histograma
 
 
 
@@ -184,20 +179,10 @@ barplot(airquality$Wind,
 
 # >>> ESCRIBA SU CODIGO AQUI:
 
-#Ejercicio 1.4
-
-plot(airquality$Temp,
-     airquality$Ozone,
-     main = "Relacion entre temperatura y Ozono (NY)",
-     xlab = "Temperatura",
-     ylab = "Ozono",
-     pch = 19,
-     col = "blue")
 
 
-# Comentario 1.4: Se observa una relacion positiva entre la temperatura y el nivel de ozono, a mayor
-# temperatura, tiende a mayor concentracion de ozono. La relacion no es perfectamente lineal pero si hay una
-# tendencia clara de aumento 
+# Comentario 1.4: ______________________________________________________________
+
 
 
 # ------------------------------------------------------------------------------
@@ -249,15 +234,6 @@ library(ggplot2)
 
 # >>> ESCRIBA SU CODIGO AQUI:
 
-ggplot(airquality,
-       aes(x = Temp, y = Ozone)) +
-  geom_point(color = "blue", 
-             pch = 19) +
-  labs(title = "Relacion entre temperatura y Ozono (NY,1973)",
-       x = "Temperatura",
-       y = "Ozono")
-
-
 
 
 # ------------------------------------------------------------------------------
@@ -276,24 +252,13 @@ ggplot(airquality,
 
 
 # ------------------------------------------------------------------------------
-# Ejercicio 2.3  GEOMETRIAS ADICIONALES Y FACETAS  (4 pts)  [Resp.: Integrante A]
+# Ejercicio 2.3  GEOMETRIAS ADICIONALES Y FACETAS  (4 pts)  [Resp.: Integrante C]
 # ------------------------------------------------------------------------------
 # Sobre el grafico del 2.2, agregue:
 #   - una capa geom_smooth(method = "lm") para mostrar la tendencia lineal;
 #   - un facet_wrap(~ Month) para separar un panel por mes.
 
 # >>> ESCRIBA SU CODIGO AQUI:
-
-ggplot(airquality, aes(x= Temp,
-                       y= Ozone,
-                       color = factor(Month))) +
-  geom_point(pch = 19) +
-  geom_smooth(method = "lm", se= FALSE) + # el method Im dibuja una linea de tendencia lineal sobre los puntos 
-  facet_wrap(~ Month) + # lo que haces es que separa los meses en 5 partes de mayo a septiembre
-  labs(title = "Relacion entre Temperatura y Ozono por Mes",
-       x = "Temperatura",
-       y = "Ozono",
-       color = "Mes")
 
 
 
@@ -305,14 +270,6 @@ ggplot(airquality, aes(x= Temp,
 
 # >>> ESCRIBA SU CODIGO AQUI:
 
-ggplot(iris, aes(x= Species,
-                 y= Sepal.Length,
-                 fill = Species)) +
-  geom_bar(stat = "summary", fun = "mean") + # le dice a ggplot no cuente filas sino que calcule el promedio de sepal.length para cada especie
-  labs(title = "Promedio de longitud del Sepalo por especies",
-       x= "Especie",
-       y= "Promedio de Sepal. Length",
-       fill = "Especie") # colorea cada baraa de un color diferente segun la especie 
 
 
 # ------------------------------------------------------------------------------
@@ -334,7 +291,7 @@ ggplot(iris, aes(x= Species,
 library(maps)
 
 # ------------------------------------------------------------------------------
-# Ejercicio 3.1  MAPA BASE  (5 pts)                [Responsable: Integrante A]
+# Ejercicio 3.1  MAPA BASE  (5 pts)                [Responsable: Integrante C]
 # ------------------------------------------------------------------------------
 # Dibuje el mapa del mundo con map(database = "world").
 # Luego dibuje UNICAMENTE el mapa de un pais a su eleccion.
@@ -342,18 +299,7 @@ library(maps)
 
 # >>> ESCRIBA SU CODIGO AQUI:
 
-# Mapa del mundo 
 
-map(database = "world")
-title(main = "Mapa del Mundo")
-
-# Mapa unicamente de Japon
-
-map("world", regions = "Japan",
-    fill = TRUE,
-    col = "darkgreen",
-    bg = "lightblue") # pone el fonde de color, simulando el mar 
-title(main = "Mapa de Japon")
 
 # ------------------------------------------------------------------------------
 # Ejercicio 3.2  MAPA POLIGONAL CON ggplot2  (5 pts)  [Resp.: Integrante A]
@@ -367,19 +313,6 @@ title(main = "Mapa de Japon")
 
 # >>> ESCRIBA SU CODIGO AQUI:
 
-dev.off() # hace que lo recetee y ggplot corra bien 
-
-japon<- map_data("world", region = "Japan")
-
-ggplot(japon, aes(x= long,
-                  y= lat, 
-                  group = group)) +
-  geom_polygon(fill = "darkgreen",
-               color = "black") +
-  coord_quickmap() +
-  labs(title = "Mapa Japon",
-       x = "Longitud",
-       y= "Latitud")
 
 
 # ------------------------------------------------------------------------------
@@ -431,10 +364,9 @@ ggplot(japon, aes(x= long,
 #     - wordcloud     : nubes de palabras.
 #     - lattice       : sistema de graficos alternativo (graficos en celosia).
 #
-# Libreria elegida: La libreria elegida en grupo fue ggridges
-# Justifiquen en una o dos lineas por que la eligieron: Elejimos ggrides porque se relaciona directamente con ggplot2,
-# lo que no sfacilia su aprendizaje al reutilizar estructuras similares, ya conocidad. Ademas nos permite comparar distibuciones entre grupos de forma visual y compacta.
-#   
+# Libreria elegida: ____________________________________________________________
+# Justifiquen en una o dos lineas por que la eligieron:
+#   ___________________________________________________________________________
 #
 # ------------------------------------------------------------------------------
 # 4.2  FICHA DE DOCUMENTACION  (6 pts)             [Responsable: Integrante B]
@@ -467,17 +399,10 @@ ggplot(japon, aes(x= long,
 # en una rama compartida (por ejemplo 'feature/parte4') y resuelvan en conjunto
 # cualquier conflicto de fusion que aparezca.
 
-#install.packages("ggridges")   # escriba aqui el nombre de su libreria
-library(ggridges)
+# install.packages("__________")   # escriba aqui el nombre de su libreria
+# library(__________)
 
 # >>> ESCRIBA SU CODIGO AQUI:
-
-iris_Species<- factor(iris$factor) # convertimos Species a factor para usarlo 
-                                   # como varible de grupo.   
-
-
-
-
 
 
 
@@ -609,3 +534,7 @@ iris_Species<- factor(iris$factor) # convertimos Species a factor para usarlo
 # ==============================================================================
 # FIN DE LA PRACTICA - SEMANA 11
 # ==============================================================================
+
+
+
+barplot()
