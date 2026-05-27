@@ -431,9 +431,10 @@ ggplot(japon, aes(x= long,
 #     - wordcloud     : nubes de palabras.
 #     - lattice       : sistema de graficos alternativo (graficos en celosia).
 #
-# Libreria elegida: ____________________________________________________________
-# Justifiquen en una o dos lineas por que la eligieron:
-#   ___________________________________________________________________________
+# Libreria elegida: La libreria elegida en grupo fue ggridges
+# Justifiquen en una o dos lineas por que la eligieron: Elejimos ggrides porque se relaciona directamente con ggplot2,
+# lo que no sfacilia su aprendizaje al reutilizar estructuras similares, ya conocidad. Ademas nos permite comparar distibuciones entre grupos de forma visual y compacta.
+#   
 #
 # ------------------------------------------------------------------------------
 # 4.2  FICHA DE DOCUMENTACION  (6 pts)             [Responsable: Integrante B]
