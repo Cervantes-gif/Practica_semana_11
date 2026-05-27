@@ -334,7 +334,7 @@ ggplot(iris, aes(x= Species,
 library(maps)
 
 # ------------------------------------------------------------------------------
-# Ejercicio 3.1  MAPA BASE  (5 pts)                [Responsable: Integrante C]
+# Ejercicio 3.1  MAPA BASE  (5 pts)                [Responsable: Integrante A]
 # ------------------------------------------------------------------------------
 # Dibuje el mapa del mundo con map(database = "world").
 # Luego dibuje UNICAMENTE el mapa de un pais a su eleccion.
@@ -342,7 +342,18 @@ library(maps)
 
 # >>> ESCRIBA SU CODIGO AQUI:
 
+# Mapa del mundo 
 
+map(database = "world",
+    title(main = "Mapa del Mundo"))
+
+# Mapa unicamente de Japon
+
+map("world", regions = "Japan",
+    fill = TRUE,
+    col = "darkgreen",
+    bg = "lightblue") # pone el fonde de color, simulando el mar 
+title(main = "Mapa de Japon")
 
 # ------------------------------------------------------------------------------
 # Ejercicio 3.2  MAPA POLIGONAL CON ggplot2  (5 pts)  [Resp.: Integrante A]
