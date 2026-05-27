@@ -141,7 +141,8 @@ barplot(airquality$Wind,
         border = "steelblue")
 
 
-
+#Interpretacion Cervantes:  El grafico muestra la velocidad del viento registrada en los 153 dias. La ,ayoria de las observaciones se encuentran entre 7 y 15 mph. 
+#Se observan algunos picos maximos que superan los 20 mph y muy pocos dias con viento cerca de 0 mph.
 
 
 
@@ -183,10 +184,20 @@ barplot(airquality$Wind,
 
 # >>> ESCRIBA SU CODIGO AQUI:
 
+#Ejercicio 1.4
+
+plot(airquality$Temp,
+     airquality$Ozone,
+     main = "Relacion entre temperatura y Ozono (NY)",
+     xlab = "Temperatura",
+     ylab = "Ozono",
+     pch = 19,
+     col = "blue")
 
 
-# Comentario 1.4: ______________________________________________________________
-
+# Comentario 1.4: Se observa una relacion positiva entre la temperatura y el nivel de ozono, a mayor
+# temperatura, tiende a mayor concentracion de ozono. La relacion no es perfectamente lineal pero si hay una
+# tendencia clara de aumento 
 
 
 # ------------------------------------------------------------------------------
