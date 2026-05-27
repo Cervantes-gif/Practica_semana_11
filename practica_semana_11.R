@@ -433,6 +433,7 @@ library(ggplot2)
 # >>> ESCRIBA SU CODIGO AQUI:
 
 
+
 dev.off() # reinicia el dispositivo gráfico
 
 japon <- map_data("world", region = "Japan")
@@ -526,18 +527,33 @@ ggplot(japon,
 # COMPLETEN la siguiente ficha como comentarios. Indiquen las fuentes.
 #
 #   a) Nombre del paquete y autor(es) principales:
+
+        # Paquete: ggridges, Autor principal: Claus O. Wilke
 #      _________________________________________________________________________
 #   b) Para que tipo de visualizaciones se utiliza:
+# 
+# Este paquete se utiliza para crea graficos de densidad ademas de histogramas
+# siertos tipo de escalonados que son utiles para comparar distribuciones de variables numericas entre varios grupos
 #      _________________________________________________________________________
 #   c) Funcion(es) principal(es) del paquete y que hace cada una:
+
+#    - geom_density_ridges() : dibuja curvas de densidad superpuestas por grupo
+#    - geom_ridgeline()      : dibuja lineas de ridge con area rellena
+#    - geom_density_ridges_gradient() : igual que geom_density_ridges pero
+#                              permite rellenar con gradiente de color segun
+#                              el valor del eje X
 #      _________________________________________________________________________
 #   d) Una ventaja y una limitacion frente al paquete base o ggplot2:
-#      Ventaja:    ______________________________________________________________
-#      Limitacion: ______________________________________________________________
+#      Ventaja: Se complementa perfectamente con ggplot2, esto permite comparar varias distribuciones en un solo grafico de forma clara y consisa
+#     
+#  Limitacion: Solo sirve para cierto tipo especifico de grafico, no es tan general como ggplot.
+
+
 #   e) Fuentes consultadas (al menos dos, con su enlace):
-#      1) _______________________________________________________________________
-#      2) _______________________________________________________________________
-#
+
+#  1) CRAN - ggridges: https://cran.r-project.org/package=ggridges
+#    2) Documentacion oficial de Claus Wilke:
+#       https://wilk
 # ------------------------------------------------------------------------------
 # 4.3  EJEMPLO APLICADO  (8 pts)                   [Responsable: TODO EL GRUPO]
 # ------------------------------------------------------------------------------
