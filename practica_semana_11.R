@@ -293,11 +293,34 @@ library(ggplot2)
 
 # >>> ESCRIBA SU CODIGO AQUI:
 
+ggplot(airquality,
+       aes(x = Temp, y = Ozone)) +
+  geom_point(color = "blue", 
+             pch = 19) +
+  labs(title = "Relacion entre temperatura y Ozono (NY,1973)",
+       x = "Temperatura",
+       y = "Ozono")
 
+
+ggplot(
+  airquality,
+  aes(
+    x = Temp,
+    y = Ozone,
+    color = factor(Month)
+  )
+) +
+  geom_point(pch = 19) +
+  labs(
+    title = "Relacion entre temperatura y Ozono (NY, 1973)",
+    x = "Temperatura",
+    y = "Ozono",
+    color = "Mes"
+  )
 
 # Comentario 2.2: ______________________________________________________________
 
-
+# ESta tercera variable lo que hace es poner diferentes colores al los meses para asi diferenciarlo en el grafico
 
 # ------------------------------------------------------------------------------
 # Ejercicio 2.3  GEOMETRIAS ADICIONALES Y FACETAS  (4 pts)  [Resp.: Integrante C]
