@@ -18,8 +18,8 @@
 # ------------------------------------------------------------------------------
 # DATOS DEL GRUPO
 # ------------------------------------------------------------------------------
-# Integrante A: ______________________  Carne: __________  GitHub: ____________
-# Integrante B: ______________________  Carne: __________  GitHub: ____________
+# Integrante A: Keylin Francinni Cervantes Mata   Carne: C4E080  GitHub: Cervantes-gif
+# Integrante B: Esteban Vargas Rodriguez  Carne: C5K725  GitHub: stebanvr
 # Integrante C: ______________________  Carne: __________  GitHub: ____________
 #               (deje en blanco si el grupo es de dos personas)
 #
@@ -62,8 +62,8 @@
 #
 #   * SI EL GRUPO ES DE DOS PERSONAS: no existe Integrante C. Repartan sus
 #     ejercicios de forma equitativa entre A y B y ANOTEN aqui como quedaron:
-#     Ej 1.3 -> ____   Ej 1.6 -> ____   Ej 2.3 -> ____   Ej 3.1 -> ____
-#     Ej 4.4 -> ____
+#     Ej 1.3 -> B  Ej 1.6 -> B  Ej 2.3 -> A   Ej 3.1 -> A
+#     Ej 4.4 -> A
 #
 #   El reparto busca que cada persona practique graficos base, ggplot2 y mapas.
 #   Esta permitido AYUDARSE entre integrantes, pero cada quien debe SUBIR con
@@ -96,13 +96,23 @@ data("ToothGrowth")
 
 # >>> ESCRIBA SU CODIGO AQUI: use str() y summary() sobre airquality y mtcars.
 
+str(airquality)
+summary(airquality)
 
+str(mtcars)
+summary(mtcars)
 
 # 0.2  En un comentario, indiquen cuantas observaciones y cuantas variables
 #      tiene 'airquality' y mencionen si contiene valores faltantes (NA).
-#
-# Respuesta 0.2: _______________________________________________________________
 
+nrow(airquality)
+ncol(airquality)
+
+sum(is.na(airquality))
+
+#
+# Respuesta 0.2: Airquality tiene 153 observaciones y 6 variales. Si contiene valores
+# faltantes en total 44 variables NA
 
 
 # ==============================================================================
@@ -121,6 +131,17 @@ data("ToothGrowth")
 # Asignele un titulo, una etiqueta de eje y un color de su eleccion.
 
 # >>> ESCRIBA SU CODIGO AQUI:
+
+#Ejercicio 1.1- Grafico de barras vertical de airquality$Wind
+
+barplot(airquality$Wind,
+        main = "Velocidad del viento en New York (1973)",
+        xlab = "Observacion",
+        ylab = "Velocidad del viento",
+        border = "steelblue")
+
+
+
 
 
 
