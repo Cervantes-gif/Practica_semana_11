@@ -166,10 +166,12 @@ hist(airquality$Ozone,
 # >>> ESCRIBA SU CODIGO AQUI:
 
 
+boxplot(Temp ~ Month, data = airquality,
+        main = "Temperaturas")
 
 # Comentario 1.3: ______________________________________________________________
 
-
+# En el mes 9 septiembre se registra la mayor temperatura  
 
 # ------------------------------------------------------------------------------
 # Ejercicio 1.4  DIAGRAMA DE DISPERSION  (4 pts)   [Responsable: Integrante A]
