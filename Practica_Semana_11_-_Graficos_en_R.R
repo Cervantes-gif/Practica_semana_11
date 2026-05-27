@@ -166,10 +166,12 @@ hist(airquality$Ozone,
 # >>> ESCRIBA SU CODIGO AQUI:
 
 
+boxplot(Temp ~ Month, data = airquality,
+        main = "Temperaturas")
 
 # Comentario 1.3: ______________________________________________________________
 
-
+# En el mes 9 septiembre se registra la mayor temperatura  
 
 # ------------------------------------------------------------------------------
 # Ejercicio 1.4  DIAGRAMA DE DISPERSION  (4 pts)   [Responsable: Integrante A]
@@ -195,10 +197,27 @@ hist(airquality$Ozone,
 
 # >>> ESCRIBA SU CODIGO AQUI:
 
+conteo_cyl <- table(mtcars$cyl)
 
 
+porcentajes <- prop.table(conteo_cyl) * 100
+
+
+etiquetas <- paste0(
+  names(conteo_cyl),
+  " cilindros: ",
+  round(porcentajes, 1),
+  "%"
+)
+
+# Gráfico de pie
+pie(
+  conteo_cyl,
+  labels = etiquetas,
+  main = "Distribución de cilindros en mtcars"
+)
 # ------------------------------------------------------------------------------
-# Ejercicio 1.6  MULTIPLES GRAFICOS Y EXPORTACION  (5 pts)  [Resp.: Integrante C]
+# Ejercicio 1.6  MULTIPLES GRAFICOS Y EXPORTACION  (5 pts)  [Resp.: Integrante B]
 # ------------------------------------------------------------------------------
 # a) Use par(mfrow = c(1, 2)) para colocar DOS graficos base de su eleccion
 #    lado a lado. Restablezca el panel con par(mfrow = c(1, 1)) al terminar.
@@ -207,6 +226,35 @@ hist(airquality$Ozone,
 #    versionar imagenes generadas automaticamente.
 
 # >>> ESCRIBA SU CODIGO AQUI:
+
+par(mfrow = c(1, 2))
+
+hist(airquality$Ozone,
+     breaks =16,
+     main = "histograma Ozone",
+     xlab = "levels ozone",
+     ylab = "Eje y")
+
+pie(
+  conteo_cyl,
+  labels = etiquetas,
+  main = "Distribución de cilindros en mtcars"
+)
+
+par(mfrow = c(1, 1))
+
+
+# guardar a png
+
+png("grafico_mpg.png", width = 800, height = 600)
+
+pie(
+  conteo_cyl,
+  labels = etiquetas,
+  main = "Distribución de cilindros en mtcars"
+)
+
+dev.off()
 
 
 
@@ -245,11 +293,34 @@ library(ggplot2)
 
 # >>> ESCRIBA SU CODIGO AQUI:
 
+ggplot(airquality,
+       aes(x = Temp, y = Ozone)) +
+  geom_point(color = "blue", 
+             pch = 19) +
+  labs(title = "Relacion entre temperatura y Ozono (NY,1973)",
+       x = "Temperatura",
+       y = "Ozono")
 
+
+ggplot(
+  airquality,
+  aes(
+    x = Temp,
+    y = Ozone,
+    color = factor(Month)
+  )
+) +
+  geom_point(pch = 19) +
+  labs(
+    title = "Relacion entre temperatura y Ozono (NY, 1973)",
+    x = "Temperatura",
+    y = "Ozono",
+    color = "Mes"
+  )
 
 # Comentario 2.2: ______________________________________________________________
 
-
+# ESta tercera variable lo que hace es poner diferentes colores al los meses para asi diferenciarlo en el grafico
 
 # ------------------------------------------------------------------------------
 # Ejercicio 2.3  GEOMETRIAS ADICIONALES Y FACETAS  (4 pts)  [Resp.: Integrante C]
@@ -281,6 +352,40 @@ library(ggplot2)
 
 # >>> ESCRIBA SU CODIGO AQUI:
 
+ggplot(
+  airquality,
+  aes(
+    x = Temp,
+    y = Ozone,
+    color = factor(Month)
+  )
+) +
+  geom_point(size = 3, alpha = 0.8) +
+  
+  # Etiquetas
+  labs(
+    title = "Relación entre temperatura y ozono",
+    subtitle = "Datos de Nueva York durante 1973",
+    x = "Temperatura (°F)",
+    y = "Concentración de Ozono",
+    color = "Mes",
+    caption = "Fuente: dataset airquality de R"
+  ) +
+  
+  # Personalizar colores
+  scale_color_manual(
+    values = c(
+      "5" = "red",
+      "6" = "blue",
+      "7" = "darkgreen",
+      "8" = "purple",
+      "9" = "orange"
+    )
+  ) +
+  
+  # Tema distinto al predeterminado
+  theme_minimal()
+
 
 
 # ==============================================================================
@@ -288,7 +393,9 @@ library(ggplot2)
 # ==============================================================================
 # 3.0  Instalen (si es necesario) y carguen el paquete 'maps'.
 # install.packages("maps", dep = TRUE)   # descomente si aun no lo tiene
+install.packages("maps")
 library(maps)
+library(ggplot2)
 
 # ------------------------------------------------------------------------------
 # Ejercicio 3.1  MAPA BASE  (5 pts)                [Responsable: Integrante C]
@@ -327,6 +434,51 @@ library(maps)
 
 
 
+dev.off() # reinicia el dispositivo gráfico
+
+japon <- map_data("world", region = "Japan")
+
+# Coordenadas de ciudades
+ciudades <- data.frame(
+  ciudad = c("Tokyo", "Osaka", "Kyoto"),
+  lon = c(139.6917, 135.5023, 135.7681),
+  lat = c(35.6895, 34.6937, 35.0116)
+)
+
+ggplot(japon,
+       aes(x = long,
+           y = lat,
+           group = group)) +
+  
+  geom_polygon(fill = "darkgreen",
+               color = "black") +
+  
+  geom_point(
+    data = ciudades,
+    aes(x = lon, y = lat),
+    color = "red",
+    size = 3,
+    inherit.aes = FALSE
+  ) +
+  
+  geom_text(
+    data = ciudades,
+    aes(x = lon,
+        y = lat,
+        label = ciudad),
+    inherit.aes = FALSE,
+    vjust = -1
+  ) +
+  
+  coord_quickmap() +
+  
+  labs(
+    title = "Mapa de Japón con ciudades importantes",
+    x = "Longitud",
+    y = "Latitud"
+  ) +
+  
+  theme_minimal()
 # ==============================================================================
 # PARTE 4 - INVESTIGACION: OTRAS LIBRERIAS DE GRAFICOS EN R  (20 puntos)
 # ==============================================================================
@@ -375,18 +527,33 @@ library(maps)
 # COMPLETEN la siguiente ficha como comentarios. Indiquen las fuentes.
 #
 #   a) Nombre del paquete y autor(es) principales:
+
+        # Paquete: ggridges, Autor principal: Claus O. Wilke
 #      _________________________________________________________________________
 #   b) Para que tipo de visualizaciones se utiliza:
+# 
+# Este paquete se utiliza para crea graficos de densidad ademas de histogramas
+# siertos tipo de escalonados que son utiles para comparar distribuciones de variables numericas entre varios grupos
 #      _________________________________________________________________________
 #   c) Funcion(es) principal(es) del paquete y que hace cada una:
+
+#    - geom_density_ridges() : dibuja curvas de densidad superpuestas por grupo
+#    - geom_ridgeline()      : dibuja lineas de ridge con area rellena
+#    - geom_density_ridges_gradient() : igual que geom_density_ridges pero
+#                              permite rellenar con gradiente de color segun
+#                              el valor del eje X
 #      _________________________________________________________________________
 #   d) Una ventaja y una limitacion frente al paquete base o ggplot2:
-#      Ventaja:    ______________________________________________________________
-#      Limitacion: ______________________________________________________________
+#      Ventaja: Se complementa perfectamente con ggplot2, esto permite comparar varias distribuciones en un solo grafico de forma clara y consisa
+#     
+#  Limitacion: Solo sirve para cierto tipo especifico de grafico, no es tan general como ggplot.
+
+
 #   e) Fuentes consultadas (al menos dos, con su enlace):
-#      1) _______________________________________________________________________
-#      2) _______________________________________________________________________
-#
+
+#  1) CRAN - ggridges: https://cran.r-project.org/package=ggridges
+#    2) Documentacion oficial de Claus Wilke:
+#       https://wilk
 # ------------------------------------------------------------------------------
 # 4.3  EJEMPLO APLICADO  (8 pts)                   [Responsable: TODO EL GRUPO]
 # ------------------------------------------------------------------------------
