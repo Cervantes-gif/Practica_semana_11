@@ -197,8 +197,25 @@ boxplot(Temp ~ Month, data = airquality,
 
 # >>> ESCRIBA SU CODIGO AQUI:
 
+conteo_cyl <- table(mtcars$cyl)
 
 
+porcentajes <- prop.table(conteo_cyl) * 100
+
+
+etiquetas <- paste0(
+  names(conteo_cyl),
+  " cilindros: ",
+  round(porcentajes, 1),
+  "%"
+)
+
+# Gráfico de pie
+pie(
+  conteo_cyl,
+  labels = etiquetas,
+  main = "Distribución de cilindros en mtcars"
+)
 # ------------------------------------------------------------------------------
 # Ejercicio 1.6  MULTIPLES GRAFICOS Y EXPORTACION  (5 pts)  [Resp.: Integrante C]
 # ------------------------------------------------------------------------------
