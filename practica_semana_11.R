@@ -352,6 +352,40 @@ ggplot(
 
 # >>> ESCRIBA SU CODIGO AQUI:
 
+ggplot(
+  airquality,
+  aes(
+    x = Temp,
+    y = Ozone,
+    color = factor(Month)
+  )
+) +
+  geom_point(size = 3, alpha = 0.8) +
+  
+  # Etiquetas
+  labs(
+    title = "Relación entre temperatura y ozono",
+    subtitle = "Datos de Nueva York durante 1973",
+    x = "Temperatura (°F)",
+    y = "Concentración de Ozono",
+    color = "Mes",
+    caption = "Fuente: dataset airquality de R"
+  ) +
+  
+  # Personalizar colores
+  scale_color_manual(
+    values = c(
+      "5" = "red",
+      "6" = "blue",
+      "7" = "darkgreen",
+      "8" = "purple",
+      "9" = "orange"
+    )
+  ) +
+  
+  # Tema distinto al predeterminado
+  theme_minimal()
+
 
 
 # ==============================================================================
