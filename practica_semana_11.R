@@ -367,6 +367,19 @@ title(main = "Mapa de Japon")
 
 # >>> ESCRIBA SU CODIGO AQUI:
 
+dev.off() # hace que lo recetee y ggplot corra bien 
+
+japon<- map_data("world", region = "Japan")
+
+ggplot(japon, aes(x= long,
+                  y= lat, 
+                  group = group)) +
+  geom_polygon(fill = "darkgreen",
+               color = "black") +
+  coord_quickmap() +
+  labs(title = "Mapa Japon",
+       x = "Longitud",
+       y= "Latitud")
 
 
 # ------------------------------------------------------------------------------
