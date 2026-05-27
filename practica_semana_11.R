@@ -276,13 +276,24 @@ ggplot(airquality,
 
 
 # ------------------------------------------------------------------------------
-# Ejercicio 2.3  GEOMETRIAS ADICIONALES Y FACETAS  (4 pts)  [Resp.: Integrante C]
+# Ejercicio 2.3  GEOMETRIAS ADICIONALES Y FACETAS  (4 pts)  [Resp.: Integrante A]
 # ------------------------------------------------------------------------------
 # Sobre el grafico del 2.2, agregue:
 #   - una capa geom_smooth(method = "lm") para mostrar la tendencia lineal;
 #   - un facet_wrap(~ Month) para separar un panel por mes.
 
 # >>> ESCRIBA SU CODIGO AQUI:
+
+ggplot(airquality, aes(x= Temp,
+                       y= Ozone,
+                       color = factor(Month))) +
+  geom_point(pch = 19) +
+  geom_smooth(method = "Im", se= FALSE) + # el method Im dibuja una linea de tendencia lineal sobre los puntos 
+  facet_wrap(~ Month) + # lo que haces es que separa los meses en 5 partes de mayo a septiembre
+  labs(title = "Relacion entre Temperatura y Ozono por Mes",
+       x = "Temperatura",
+       y = "Ozono",
+       color = "Mes")
 
 
 
